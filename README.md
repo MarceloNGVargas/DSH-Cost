@@ -211,7 +211,6 @@ Outras formas:
 dsh plugin --profile desktop add "github:MarceloNGVargas/DSH-Cost#v1.0.0"   # versão fixada
 pnpm pack                                                    # gera dsh-session-cost-monitor-1.0.0.tgz
 dsh plugin --profile desktop add ./dsh-session-cost-monitor-1.0.0.tgz
-dsh plugin --profile desktop add dsh-session-cost-monitor    # quando publicado no npm
 ```
 
 O `.tgz` também está anexado na
@@ -226,34 +225,25 @@ no chat. Para remover: `dsh plugin --profile desktop remove dsh-session-cost-mon
 
 ## Publicação
 
-Este pacote é um **bundle** no sentido oficial do DSH (declara `dsh.bundle.patch`), então
-publicá-lo é publicar um pacote npm — o **monorepo oficial não recebe plugins de terceiros**
-(a documentação do projeto orienta npm, tarball ou git). Nome pronto e livre no registry:
-`dsh-session-cost-monitor` (o nome `dsh-session-cost` já pertence a outro autor).
+Este pacote é um **bundle** no sentido oficial do DSH (declara `dsh.bundle.patch`) e é
+distribuído por **git**, sem depender de registry. O **monorepo oficial não recebe plugins de
+terceiros** — a documentação do projeto orienta npm, tarball ou git; aqui usamos git + release:
 
 ```sh
-# valida o conteúdo que iria para o registry
-pnpm pack --dry-run
-
-# publica (requer conta npm autenticada: npm login)
-pnpm publish --access public
-# ou: npm publish --access public
+pnpm pack --dry-run                      # confere o conteúdo do pacote
+git tag v1.0.0 && git push origin v1.0.0
+gh release create v1.0.0 ./dsh-session-cost-monitor-1.0.0.tgz --generate-notes
 ```
 
 Quem instala:
 
 ```sh
-dsh plugin --profile desktop add dsh-session-cost-monitor
-# equivalente ao plugin_manager → install_bundle
-```
-
-Alternativas sem npm:
-
-```sh
-pnpm pack                                   # gera dsh-session-cost-monitor-1.0.0.tgz
-dsh plugin --profile desktop add ./dsh-session-cost-monitor-1.0.0.tgz
 dsh plugin --profile desktop add github:MarceloNGVargas/DSH-Cost
+dsh plugin --profile desktop add "github:MarceloNGVargas/DSH-Cost#v1.0.0"   # versão fixada
 ```
+
+O nome `dsh-session-cost-monitor` continua livre no npm, caso um dia valha publicar lá
+(a conta npm exige 2FA com bypass por token granular para publicar).
 
 Os campos `repository`, `bugs`, `homepage` e `author` já apontam para este repositório.
 O pacote é MIT — veja [LICENSE](LICENSE).
