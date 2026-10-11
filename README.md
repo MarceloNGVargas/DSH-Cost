@@ -16,8 +16,9 @@ processamento", i18n, tabela de configuração e limitações.
 
 Interface e saída do comando em **pt-BR**, **en**, **es** e **zh-CN**:
 
-- `auto` (padrão) detecta pelo idioma do sistema (aqui: Windows/`CurrentUICulture`)
-  e cai para inglês quando não há correspondência;
+- `auto` (padrão) no **comando** resolve por `DSH_LOCALE`/`DSH_LANG`/`LANG` e, sem eles, pelo
+  idioma do sistema via `Intl`; a **janela** usa o `CurrentUICulture` do Windows. Nos dois casos
+  cai para inglês quando não há correspondência.
 - para forçar, use `config.language: en` (ou `pt-BR`, `es`, `zh-CN`) no patch do perfil;
 - o monitor visual aceita `-Language auto|pt-BR|en|es|zh-CN` e usa os dicionários em
   [`app/locales/`](app/locales);
@@ -95,10 +96,8 @@ app instalado. O **esforço** aparece por requisição e por sessão (`Low`, `Me
   (`sessionStats.pendingCalls`/`openStep`) ou chamada de modelo em curso — então cobre também o
   intervalo em que o agente executa ferramentas entre duas requisições. Quando o turno fecha, a
   sessão sai da lista sozinha; sem nada rodando, o cartão mostra "nada processando agora";
-- **EM ANDAMENTO** — a requisição em curso: modelo, esforço, cronômetro ao vivo, TTFT e tokens;
 - **economia com cache** — quanto os tokens lidos do cache deixaram de custar por não virem como
   miss, em R$ e US$, mais o **cache hit %** do dia e da última requisição;
-- **EM ANDAMENTO** — chamada em curso com cronômetro ao vivo, esforço, TTFT e tokens já recebidos;
 - **ÚLTIMA REQUISIÇÃO** — modelo, esforço, duração, TTFT, miss/cache/saída, custo total,
   divisão entrada/saída e economia com cache;
 - **RECENTES** — as últimas requisições da sessão ativa: `hora | modelo | esforco | tempo | in | out | R$ | US$ | econ.R$ | econ.US$`;
@@ -143,9 +142,10 @@ Para abrir direto numa aba: `-Tab 0` (Ao vivo), `-Tab 1` (Sessões), `-Tab 2` (H
 
 Arquitetura (três peças, sem acoplar o app ao plugin):
 
-1. o plugin mede cada `llm/stream` e grava `~/.dsh/session-cost/sessions/<sessão>.json`;
-2. `app/monitor.mjs` (Node) agrega esses arquivos a cada segundo, recalcula preços
-   com a mesma tabela do plugin e grava `~/.dsh/session-cost/live.json`;
+1. o plugin mede cada `llm/stream` e grava `~/.dsh/session-cost/sessions/<sessão>.json`
+   (o nome do arquivo é o `sessionId` com URL-encoding);
+2. `app/monitor.mjs` (Node) agrega esses arquivos a cada segundo, aplica a tabela de preços
+   **padrão** do plugin (`resolveConfig({})`) e grava `~/.dsh/session-cost/live.json`;
 3. `app/SessionCostMonitor.ps1` (WPF) lê `live.json` a cada 500 ms e desenha a janela.
 
 Por isso o app continua funcionando mesmo quando o app DSH ainda está com uma

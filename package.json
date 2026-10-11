@@ -1,6 +1,6 @@
 {
   "name": "dsh-session-cost-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DSH plugin: per-request latency and token cost per session, in USD and BRL at the day FX rate, with a live Windows monitor and cache savings",
   "type": "module",
   "main": "lib/index.js",
@@ -13,6 +13,7 @@
   "files": [
     "lib",
     "app",
+    "docs",
     "cordis.patch.yml",
     "README.md",
     "CHANGELOG.md",

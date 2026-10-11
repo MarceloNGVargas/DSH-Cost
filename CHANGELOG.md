@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.1
+
+- **Documentação técnica completa** em [`docs/COMO-FUNCIONA.md`](docs/COMO-FUNCIONA.md):
+  arquitetura das três peças, fluxo de dados, formatos de arquivo, todas as chaves do
+  `live.json`, cálculo de custo (`inputTokens` = cache miss, peak/off-peak, economia de
+  cache), comando `/custo`, critério de "sessão em processamento", i18n, configuração,
+  instalação/publicação e limitações conhecidas.
+- `docs/` passou a ser incluído no pacote (`files`).
+- README alinhado ao código: resolução de idioma (comando × janela), nome do arquivo de
+  sessão com URL-encoding, tabela de preços usada pelo monitor e remoção de um bullet
+  duplicado.
+
 ## 1.0.0
 
 Primeira versão publicável.
