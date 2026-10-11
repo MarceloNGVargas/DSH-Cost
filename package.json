@@ -1,0 +1,61 @@
+{
+  "name": "dsh-session-cost-monitor",
+  "version": "1.0.0",
+  "description": "DSH plugin: per-request latency and token cost per session, in USD and BRL at the day FX rate, with a live Windows monitor and cache savings",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./i18n": "./lib/i18n.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib",
+    "app",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.0-rc.1"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "bundle",
+    "cost",
+    "tokens",
+    "pricing",
+    "usage",
+    "latency",
+    "cache",
+    "i18n"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "MarceloNGVargas",
+    "url": "https://github.com/MarceloNGVargas"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarceloNGVargas/DSH-Cost.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MarceloNGVargas/DSH-Cost/issues"
+  },
+  "homepage": "https://github.com/MarceloNGVargas/DSH-Cost",
+  "engines": {
+    "node": ">=20"
+  }
+}

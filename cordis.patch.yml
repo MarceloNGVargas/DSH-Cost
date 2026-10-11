@@ -1,0 +1,27 @@
+# Bundle `dsh-session-cost-monitor`: insere o medidor de custo/latência por sessão
+# no perfil, com o comando `/custo` disponível em toda sessão e o monitor visual
+# do Windows em `app/`.
+#
+# Configuração opcional (os defaults estão em lib/index.js):
+#   - id: session-cost
+#     name: 'dsh-session-cost-monitor'
+#     config:
+#       commandName: custo          # nome do comando (sem a barra)
+#       aliasCommands: [cost]       # nomes extras do mesmo comando
+#       language: auto              # auto | pt-BR | en | es | zh-CN
+#       peakPolicy: auto            # auto | peak | off-peak
+#       persist: true               # grava medições em ~/.dsh/session-cost
+#       maxRequestsPerSession: 500  # teto de requisições guardadas por sessão
+#       fx:
+#         cacheHours: 6             # validade da cotação em cache
+#         timeoutMs: 8000
+#         # url: https://exemplo/cotacao.json   # provedor extra (lido primeiro)
+#       prices:                     # USD por 1M tokens; sobrescreve a tabela
+#         deepseek-flash:
+#           cacheHit: { offPeak: 0.003, peak: 0.006 }
+#           cacheMiss: { offPeak: 0.15, peak: 0.3 }
+#           output: { offPeak: 0.6, peak: 1.2 }
+
+- insert:
+    - id: session-cost
+      name: 'dsh-session-cost-monitor'
