@@ -7,6 +7,11 @@ Plugin global do DeepSeek Harness que mede, **por sessão**, o tempo e o custo d
 cada requisição de modelo, e mostra o total em **dólar** e em **real** usando a
 **cotação do dólar do dia** — com comando no chat e monitor visual no Windows.
 
+📖 **Como funciona, por dentro:** [`docs/COMO-FUNCIONA.md`](docs/COMO-FUNCIONA.md) —
+arquitetura das três peças, formatos dos arquivos em `~/.dsh/session-cost`,
+cálculo de preço (peak/off-peak, cache miss/hit), critério de "sessão em
+processamento", i18n, tabela de configuração e limitações.
+
 ## Idiomas
 
 Interface e saída do comando em **pt-BR**, **en**, **es** e **zh-CN**:
