@@ -1,5 +1,8 @@
 # dsh-session-cost-monitor
 
+[![release](https://img.shields.io/github/v/release/MarceloNGVargas/DSH-Cost)](https://github.com/MarceloNGVargas/DSH-Cost/releases/latest)
+[![license](https://img.shields.io/github/license/MarceloNGVargas/DSH-Cost)](LICENSE)
+
 Plugin global do DeepSeek Harness que mede, **por sessão**, o tempo e o custo de
 cada requisição de modelo, e mostra o total em **dólar** e em **real** usando a
 **cotação do dólar do dia** — com comando no chat e monitor visual no Windows.
@@ -205,10 +208,14 @@ dsh plugin --profile desktop add github:MarceloNGVargas/DSH-Cost
 Outras formas:
 
 ```
+dsh plugin --profile desktop add "github:MarceloNGVargas/DSH-Cost#v1.0.0"   # versão fixada
 pnpm pack                                                    # gera dsh-session-cost-monitor-1.0.0.tgz
 dsh plugin --profile desktop add ./dsh-session-cost-monitor-1.0.0.tgz
 dsh plugin --profile desktop add dsh-session-cost-monitor    # quando publicado no npm
 ```
+
+O `.tgz` também está anexado na
+[release](https://github.com/MarceloNGVargas/DSH-Cost/releases/latest).
 
 Também funciona pela interface: página **Plugins** da barra lateral, ou a ferramenta
 `plugin_manager` → `install_bundle` com o spec escolhido.
